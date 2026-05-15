@@ -66,7 +66,9 @@ cp -R cmake-build-release/coffee_dialer.app /Applications/
 - CMake
 
 ## Future Iterations
-
+- Refactor: App functions for V1, further iterations need a cleanup
+  - Move state into struct
+  - Separate functionality into sub folders to clean main
 - Add brew method selection:
   - V60
   - Espresso
