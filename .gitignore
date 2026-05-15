@@ -1,0 +1,67 @@
+# -----------------------------
+# CLion / JetBrains
+# -----------------------------
+.idea/
+
+# -----------------------------
+# CMake / CLion build folders
+# -----------------------------
+cmake-build-*/
+build/
+out/
+
+# CMake generated files
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+compile_commands.json
+
+# -----------------------------
+# Runtime app data / SQLite
+# -----------------------------
+*.db
+*.sqlite
+*.sqlite3
+*.db-journal
+*.sqlite-journal
+*.sqlite3-journal
+*.db-wal
+*.db-shm
+*.sqlite-wal
+*.sqlite-shm
+*.sqlite3-wal
+*.sqlite3-shm
+
+# -----------------------------
+# Build artifacts
+# -----------------------------
+*.o
+*.obj
+*.a
+*.lib
+*.so
+*.dylib
+*.dll
+*.exe
+*.app/
+*.dSYM/
+
+# -----------------------------
+# macOS
+# -----------------------------
+.DS_Store
+
+# -----------------------------
+# Logs / temp files
+# -----------------------------
+*.log
+*.tmp
+*.bak
+*.swp
+
+# -----------------------------
+# Optional local config
+# -----------------------------
+.env
+.env.local
