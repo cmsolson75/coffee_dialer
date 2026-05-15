@@ -19,7 +19,6 @@ add_executable(coffee_dialer
         external/imgui/backends/imgui_impl_opengl3.cpp
         external/sqlite/sqlite3.h
         external/sqlite/sqlite3.c
-        src/notes.cpp
         src/db.cpp
         src/model.h
         src/db.h
