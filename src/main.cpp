@@ -235,7 +235,10 @@ int main() {
     static int editIndex = -1;
 
     while (!glfwWindowShouldClose(window)) {
-        glfwPollEvents();
+        // Was adding high CPU overhead
+        // glfwPollEvents();
+        // 15fps if user is not interacting
+        glfwWaitEventsTimeout(1.0 / 15.0);
 
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
