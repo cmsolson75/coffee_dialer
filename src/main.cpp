@@ -234,12 +234,21 @@ int main() {
     static int selectedIndex = -1;
     static int editIndex = -1;
 
-    while (!glfwWindowShouldClose(window)) {
-        // Was adding high CPU overhead
-        // glfwPollEvents();
-        // 15fps if user is not interacting
-        glfwWaitEventsTimeout(1.0 / 15.0);
+    double lastInteractionTime = glfwGetTime();
+    constexpr double interactiveFps = 15.0;
+    constexpr double interactiveWindowSeconds = 0.50;
 
+    while (!glfwWindowShouldClose(window)) {
+        // Sleep fully when idle. During interaction, redraw at 15 FPS.
+        // This keeps idle CPU near zero while preserving enough UI responsiveness.
+        double now = glfwGetTime();
+        bool recentlyInteracted = (now - lastInteractionTime) < interactiveWindowSeconds;
+
+        if (recentlyInteracted) {
+            glfwWaitEventsTimeout(1.0/interactiveFps);
+        } else {
+            glfwWaitEvents();
+        }
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
@@ -248,6 +257,20 @@ int main() {
 
         FormWindow(&db,coffeeEntries, form, editIndex);
         DisplayWindow(&db, coffeeEntries, form, selectedIndex, editIndex);
+
+        const ImGuiIO& io = ImGui::GetIO();
+
+        bool interacting =
+            ImGui::IsAnyItemActive() ||
+            ImGui::IsMouseDown(ImGuiMouseButton_Left) ||
+            ImGui::IsMouseDown(ImGuiMouseButton_Right) ||
+            io.MouseDelta.x != 0.0f ||
+            io.MouseDelta.y != 0.0f ||
+            io.WantTextInput;
+
+        if (interacting) {
+            lastInteractionTime = glfwGetTime();
+        }
 
         ImGui::Render();
 
